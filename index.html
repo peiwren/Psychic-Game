@@ -40,9 +40,11 @@
         let userGuessArray = [];
 
         // for (let i = 0; i <= 3; i++) {
-        function playGame() {
-            //capture the choices
 
+        //capture the choices
+
+
+        function playMyGame() {
             document.onkeyup = function () {
 
                 // alert("working!")
@@ -51,6 +53,7 @@
                 // console.log('You pick: ' + userGuess)
 
                 userGuessArray.push(' ' + userGuess);
+                console.log(userGuessArray);
 
                 //create a fomula that will have the computer choose from this array
                 let computerGuess = letters[Math.floor(Math.random() * letters.length)]
@@ -58,6 +61,9 @@
 
 
                 //make sure the user pick the right letters within the options
+                // Create an array where each letter is an element
+                // Use for loop to iterate through that array
+                // If the userGuess is found in the array, then proceed with the game
                 if (userGuess === 'a' || userGuess === 'b' || userGuess === 'c' || userGuess === 'd' ||
                     userGuess ===
                     'e' || userGuess === 'f' || userGuess === 'g' || userGuess === 'h' || userGuess === 'i' ||
@@ -74,6 +80,7 @@
                     if (userGuess === computerGuess) {
                         //replace 'You tie' with the increment to count how many ties
                         wins++;
+                        // Consider resetting guessLeft count back to original value when a user wins
                         guessLeft--;
                         // userGuessArray.push(userGuess);
                         // console.log(win)
@@ -83,7 +90,11 @@
                         guessLeft--;
                         // userGuessArray.push(userGuess);
                         // console.log(losses)
+                        // Add a condition for when the guessLeft hits 0
+                    } else if ('guessLeft hits 0 logic') {
+
                     } else {
+
                         //replace 'losses' with the increment to count how many losses
 
                     } //end of logic for win , loss , guessLeft
@@ -94,24 +105,50 @@
                     document.getElementById("l").innerHTML = 'Lossed &colon; ' + losses;
                     document.getElementById("left").innerHTML = 'Guess Left &colon; ' + guessLeft;
 
-
+                    console.log(userGuessArray[0], userGuessArray[1], userGuessArray[2])
+                    console.log(typeof userGuessArray)
                     document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ' +
                         userGuessArray;
 
 
-                    if (guessLeft < 0) {
-                        document.getElementById("w").innerHTML = 'Wins &colon; 0';
-                        document.getElementById("l").innerHTML = 'Lossed &colon; 0'
-                        document.getElementById("left").innerHTML = 'Guess Left &colon; 3'
-                        document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ';
-                    }
+
+                    // if (guessLeft < 0) {
+                    //     document.getElementById("w").innerHTML = 'Wins &colon; 0';
+                    //     document.getElementById("l").innerHTML = 'Lossed &colon; 0'
+                    //     document.getElementById("left").innerHTML = 'Guess Left &colon; 3'
+                    //     document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ';
+                    // } else {
+                    //     document.onkeyup()
+                    // }
+
 
                 } else {
-                    alert('Please choose letter from a to z');
+                    // alert('Please choose letter from a to z');
                 } // end of else
             } // end of onkeyup
         }
-        playGame();
+
+        playMyGame();
+
+
+        if (guessLeft < 0) {
+            document.getElementById("w").innerHTML = 'Wins &colon; 0';
+            document.getElementById("l").innerHTML = 'Lossed &colon; 0'
+            document.getElementById("left").innerHTML = 'Guess Left &colon; 3'
+            document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ';
+        } else {
+            document.onkeyup()
+        }
+
+        // if (guessLeft > 0 && guessLeft < 4) {
+        //     playMyGame();
+        // }
+
+
+
+        // for (let i = 1; i <= 10; i++) {
+        //     document.onkeyup()
+        // };
     </script>
 </body>
 
