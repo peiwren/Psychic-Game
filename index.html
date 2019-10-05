@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div>
+    <div id="game">
         <h1>Psychic Game</h1>
         <p>Guess what letter I'm thinking of?</p>
         <p id="w">Wins &colon; 0</p>
@@ -27,21 +27,20 @@
     display the result to the user -->
 
     <script>
+        // make a list of choices to allow the computer to make a choice
+        //create an array of options for computer
+        const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+            'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+        ];
+
+        //set starting values for wins, losses and guessLeft
+        let wins = 0;
+        let losses = 0;
+        let guessLeft = 3;
+        let userGuessArray = [];
+
+        // for (let i = 0; i <= 3; i++) {
         function playGame() {
-            // make a list of choices to allow the computer to make a choice
-            //create an array of options for computer
-            const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-            ];
-
-            //set starting values for wins, losses and guessLeft
-            let wins = 0;
-            let losses = 0;
-            let guessLeft = 3;
-            let userGuessArray = [];
-
-            // for (let i = 0; i <= 3; i++) {
-
             //capture the choices
 
             document.onkeyup = function () {
@@ -52,7 +51,6 @@
                 // console.log('You pick: ' + userGuess)
 
                 userGuessArray.push(' ' + userGuess);
-
 
                 //create a fomula that will have the computer choose from this array
                 let computerGuess = letters[Math.floor(Math.random() * letters.length)]
@@ -100,21 +98,19 @@
                     document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ' +
                         userGuessArray;
 
-                    while (guessLeft === -1) {
-                        document.getElementById("w").innerHTML = 'Wins &colon; 0';
-                        document.getElementById("l").innerHTML = 'Lossed &colon; 0';
-                        document.getElementById("left").innerHTML = 'Your Guesses lefe &colon; 3';
-                        document.getElementById("left").innerHTML = 'Your Guesses so far &colon; ';
-                    };
 
+                    if (guessLeft < 0) {
+                        document.getElementById("w").innerHTML = 'Wins &colon; 0';
+                        document.getElementById("l").innerHTML = 'Lossed &colon; 0'
+                        document.getElementById("left").innerHTML = 'Guess Left &colon; 3'
+                        document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ';
+                    }
 
                 } else {
-                    alert('Please choose from letter a to z');
+                    alert('Please choose letter from a to z');
                 } // end of else
-
             } // end of onkeyup
         }
-        playGame();
         playGame();
     </script>
 </body>
