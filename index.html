@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Psychid game</title>
+    <title>demo</title>
 </head>
 
 <body>
@@ -27,92 +27,95 @@
     display the result to the user -->
 
     <script>
-        // make a list of choices to allow the computer to make a choice
-        //create an array of options for computer
-        const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-            'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-        ];
+        function playGame() {
+            // make a list of choices to allow the computer to make a choice
+            //create an array of options for computer
+            const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+            ];
 
-        //set starting values for wins, losses and guessLeft
-        let wins = 0;
-        let losses = 0;
-        let guessLeft = 3;
-
-        // for (let i = 0; i <= 3; i++) {
-
-        //capture the choices
-        document.onkeyup = function () {
-
-            // alert("working!")
-            // capture wha tkey the user is pressing
-            let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-            // console.log('You pick: ' + userGuess)
-
+            //set starting values for wins, losses and guessLeft
+            let wins = 0;
+            let losses = 0;
+            let guessLeft = 3;
             let userGuessArray = [];
-            debugger
-            userGuessArray.push(userGuess);
+
+            // for (let i = 0; i <= 3; i++) {
+
+            //capture the choices
+
+            document.onkeyup = function () {
+
+                // alert("working!")
+                // capture wha tkey the user is pressing
+                let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+                // console.log('You pick: ' + userGuess)
+
+                userGuessArray.push(' ' + userGuess);
 
 
-            //create a fomula that will have the computer choose from this array
-            let computerGuess = letters[Math.floor(Math.random() * letters.length)]
-            // console.log('Computer: ' + computerGuess);
+                //create a fomula that will have the computer choose from this array
+                let computerGuess = letters[Math.floor(Math.random() * letters.length)]
+                // console.log('Computer: ' + computerGuess);
 
 
-            //make sure the user pick the right letters within the options
-            if (userGuess === 'a' || userGuess === 'b' || userGuess === 'c' || userGuess === 'd' || userGuess ===
-                'e' || userGuess === 'f' || userGuess === 'g' || userGuess === 'h' || userGuess === 'i' ||
-                userGuess === 'j' || userGuess === 'k' || userGuess === 'l' || userGuess === 'm' || userGuess ===
-                'n' || userGuess === 'o' || userGuess === 'p' || userGuess === 'q' || userGuess === 'r' ||
-                userGuess === 's' || userGuess === 't' || userGuess === 'u' || userGuess === 'v' || userGuess ===
-                'w' || userGuess === 'x' || userGuess === 'y' || userGuess === 'z') {
-                //test to see if it works
-                // alert('chose correctly');
+                //make sure the user pick the right letters within the options
+                if (userGuess === 'a' || userGuess === 'b' || userGuess === 'c' || userGuess === 'd' ||
+                    userGuess ===
+                    'e' || userGuess === 'f' || userGuess === 'g' || userGuess === 'h' || userGuess === 'i' ||
+                    userGuess === 'j' || userGuess === 'k' || userGuess === 'l' || userGuess === 'm' ||
+                    userGuess ===
+                    'n' || userGuess === 'o' || userGuess === 'p' || userGuess === 'q' || userGuess === 'r' ||
+                    userGuess === 's' || userGuess === 't' || userGuess === 'u' || userGuess === 'v' ||
+                    userGuess ===
+                    'w' || userGuess === 'x' || userGuess === 'y' || userGuess === 'z') {
+                    //test to see if it works
+                    // alert('chose correctly');
 
-                //logic for if wind and loss situation
-                if (userGuess === computerGuess) {
-                    //replace 'You tie' with the increment to count how many ties
-                    wins++;
-                    guessLeft--;
-                    // console.log(win)
-                } else if (userGuess !== computerGuess) {
-                    //replace 'You tie' with the increment to count how many ties
-                    losses++;
-                    guessLeft--;
-                    // console.log(losses)
+                    //logic for if wind and loss situation
+                    if (userGuess === computerGuess) {
+                        //replace 'You tie' with the increment to count how many ties
+                        wins++;
+                        guessLeft--;
+                        // userGuessArray.push(userGuess);
+                        // console.log(win)
+                    } else if (userGuess !== computerGuess) {
+                        //replace 'You tie' with the increment to count how many ties
+                        losses++;
+                        guessLeft--;
+                        // userGuessArray.push(userGuess);
+                        // console.log(losses)
+                    } else {
+                        //replace 'losses' with the increment to count how many losses
+
+                    } //end of logic for win , loss , guessLeft
+
+
+                    //updates as win, lose, and guessleft
+                    document.getElementById("w").innerHTML = 'Wins &colon; ' + wins;
+                    document.getElementById("l").innerHTML = 'Lossed &colon; ' + losses;
+                    document.getElementById("left").innerHTML = 'Guess Left &colon; ' + guessLeft;
+
+
+                    document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ' +
+                        userGuessArray;
+
+                    while (guessLeft === -1) {
+                        document.getElementById("w").innerHTML = 'Wins &colon; 0';
+                        document.getElementById("l").innerHTML = 'Lossed &colon; 0';
+                        document.getElementById("left").innerHTML = 'Your Guesses lefe &colon; 3';
+                        document.getElementById("left").innerHTML = 'Your Guesses so far &colon; ';
+                    };
+
+
                 } else {
-                    //replace 'losses' with the increment to count how many losses
+                    alert('Please choose from letter a to z');
+                } // end of else
 
-                } //end of logic for win , loss , guessLeft
-
-
-
-
-                //updates as win, lose, and guessleft
-                document.getElementById("w").innerHTML = 'Wins &colon;' + wins;
-                document.getElementById("l").innerHTML = 'Lossed &colon;' + losses;
-                document.getElementById("left").innerHTML = 'Guess Left &colon;' + guessLeft;
-
-
-                document.getElementById("result").innerHTML = 'Your Guesses so far &colon;' + userGuessArray[0] +
-                    ',' + userGuessArray[1] + ',' + userGuessArray[2];
-
-                // while (guessLeft === -1) {
-                //     document.getElementById("w").innerHTML = 'Wins &colon; 0';
-                //     document.getElementById("l").innerHTML = 'Lossed &colon; 0';
-                //     document.getElementById("left").innerHTML = 'Your Guesses lefe &colon; 3';
-                //     document.getElementById("left").innerHTML = 'Your Guesses so far &colon; ';
-                // };
-
-
-
-
-            } else {
-                alert('Please choose from letter a to z');
-            } // end of else
-
-        } // end of onkeyup
-
-        // } // end of for loop
+            } // end of onkeyup
+        }
+        playGame();
+        playGame();
     </script>
 </body>
 
