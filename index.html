@@ -5,86 +5,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Psychic-Game</title>
+    <title>Psychid game</title>
 </head>
 
 <body>
-    <h1>Psychic Game</h1>
-    <h3 id="win">Wins:</h3>
-    <h3 id="loss">Losses:</h3>
-    <h3 id="guessesLeft">Guesses Left:</h3>
-    <h3 id="yourGuesses">Your Guesses So Far:</h3>
-    <script>
-        // let wins = 0;
-        // let losses = 0;
-        // let guessesLeft = 9;
-        // let yourGuessesSoFar = '';
+    <div>
+        <h1>Psychic Game</h1>
+        <p>Guess what letter I'm thinking of?</p>
+        <p id="w">Wins &colon; 0</p>
+        <p id="l">Losses &colon; 0</p>
+        <p id="left">Guesses Left &colon; 3</p>
+        <p id="result">Your Guesses so far &colon;</p>
+    </div>
 
+
+    <!-- pseudocode -->
+    <!-- need the user to make a choice
+    need the computr to make a choice
+    capture these choices
+    compare these choices, and count win, loss, guessleft by incremen and decrement...
+    display the result to the user -->
+
+    <script>
+        // make a list of choices to allow the computer to make a choice
+        //create an array of options for computer
         const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
             'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
         ];
 
-        //*list of all letters
-        //*computer random letter generator
-        //*check user guess
-        //*display result
-        //*reset game
+        //set starting values for wins, losses and guessLeft
+        let wins = 0;
+        let losses = 0;
+        let guessLeft = 3;
+
+        // for (let i = 0; i <= 3; i++) {
+
+        //capture the choices
+        document.onkeyup = function () {
+
+            // alert("working!")
+            // capture wha tkey the user is pressing
+            let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+            // console.log('You pick: ' + userGuess)
+
+            let userGuessArray = [];
+            debugger
+            userGuessArray.push(userGuess);
+
+
+            //create a fomula that will have the computer choose from this array
+            let computerGuess = letters[Math.floor(Math.random() * letters.length)]
+            // console.log('Computer: ' + computerGuess);
+
+
+            //make sure the user pick the right letters within the options
+            if (userGuess === 'a' || userGuess === 'b' || userGuess === 'c' || userGuess === 'd' || userGuess ===
+                'e' || userGuess === 'f' || userGuess === 'g' || userGuess === 'h' || userGuess === 'i' ||
+                userGuess === 'j' || userGuess === 'k' || userGuess === 'l' || userGuess === 'm' || userGuess ===
+                'n' || userGuess === 'o' || userGuess === 'p' || userGuess === 'q' || userGuess === 'r' ||
+                userGuess === 's' || userGuess === 't' || userGuess === 'u' || userGuess === 'v' || userGuess ===
+                'w' || userGuess === 'x' || userGuess === 'y' || userGuess === 'z') {
+                //test to see if it works
+                // alert('chose correctly');
+
+                //logic for if wind and loss situation
+                if (userGuess === computerGuess) {
+                    //replace 'You tie' with the increment to count how many ties
+                    wins++;
+                    guessLeft--;
+                    // console.log(win)
+                } else if (userGuess !== computerGuess) {
+                    //replace 'You tie' with the increment to count how many ties
+                    losses++;
+                    guessLeft--;
+                    // console.log(losses)
+                } else {
+                    //replace 'losses' with the increment to count how many losses
+
+                } //end of logic for win , loss , guessLeft
 
 
 
-        function computerChoice() {
-            return letters[Math.floor(Math.random() * letters.length)];
-        }
-        let computerChoiceLetter = computerChoice();
+
+                //updates as win, lose, and guessleft
+                document.getElementById("w").innerHTML = 'Wins &colon;' + wins;
+                document.getElementById("l").innerHTML = 'Lossed &colon;' + losses;
+                document.getElementById("left").innerHTML = 'Guess Left &colon;' + guessLeft;
 
 
-        function userGuess() {
-            let userGuessLetter = prompt('Guess which letter the app chose?');
-            //get guess
-            document.getElementById("yourGuesses").innerHTML = "yourGuesses: " + userGuessLetter;
+                document.getElementById("result").innerHTML = 'Your Guesses so far &colon;' + userGuessArray[0] +
+                    ',' + userGuessArray[1] + ',' + userGuessArray[2];
 
-        }
-        let userGuessLetter = userGuess();
+                // while (guessLeft === -1) {
+                //     document.getElementById("w").innerHTML = 'Wins &colon; 0';
+                //     document.getElementById("l").innerHTML = 'Lossed &colon; 0';
+                //     document.getElementById("left").innerHTML = 'Your Guesses lefe &colon; 3';
+                //     document.getElementById("left").innerHTML = 'Your Guesses so far &colon; ';
+                // };
 
-        for (let i = 0; i < 3; i++) {
-            let wins = 0;
-            let losses = 0;
-            let guessesLeft = 3;
-            let yourGuessesSoFar = '';
 
-            if (userGuessLetter === computerChoiceLetter) {
-                document.getElementById("win").innerHTML = "Wins: " +
-                    (wins + 1);
 
-            } else if (userGuessLetter !== computerChoiceLetter) {
-                document.getElementById("loss").innerHTML = "Losses: " +
-                    (losses + 1);
+
             } else {
-                console.log("Restart game!")
-            }
+                alert('Please choose from letter a to z');
+            } // end of else
 
-        }
+        } // end of onkeyup
 
-        for (let i = 3; i > 0; i--) {
-            let guessesLeft = 3;
-            userGuessLetter;
-            if ((userGuessLetter === computerChoiceLetter) || userGuessLetter !== computerChoiceLetter) {
-                document.getElementById("guessesLeft").innerHTML = "Guesses left: " + (guessesLeft - 1);
-
-            }
-        }
-        for (let i = 0; i < 3; i++) {
-            let userGuessLetter = prompt('Guess which letter the app chose?');
-            let yourGuessesSoFar = '';
-            document.getElementById("yourGuesses").innerHTML = "Your guesses so far: " +
-                yourGuessesSoFar + " " + userGuessLetter;
-        }
-        /*console.log("you win: " + wins);
-        console.log("you loss: " + losses);
-        console.log("Guesses left: " + guessesLeft);
-        */
+        // } // end of for loop
     </script>
-
 </body>
 
 </html>
