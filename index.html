@@ -18,13 +18,12 @@
         <p id="result">Your Guesses so far &colon; </p>
     </div>
 
-
     <!-- pseudocode -->
     <!-- 
     -need the user to make a choice
     -need the computr to make a choice
-    -capture these choices
-    -compare these choices, and count win, loss, guessleft by incremen and decrement...
+    -capture the user's and computer's choice
+    -compare these choices, and count win, loss, guessleft
     -display the result to the user -->
 
     <script>
@@ -43,8 +42,6 @@
 
 
         function reset() {
-            // wins;
-            // losses;
             guessLeft;
             userGuessLetters = '';
             document.getElementById("w").innerHTML = 'Wins &colon; 0';
@@ -54,19 +51,14 @@
         }
 
         document.onkeyup = function (event) {
-
-            // alert("working!")
             // capture what key the user is pressing
             let userGuess = event.key;
-
             userGuessLetters += userGuess + ', ';
-            console.log('you guessed ' + userGuessLetters);
+            // console.log('you guessed ' + userGuessLetters);
 
-            //create a fomula that will have the computer choose from this array
+            //create a fomula that will have the computer choose from the letters array
             let computerGuess = letters[Math.floor(Math.random() * letters.length)]
-            console.log('computer chose ' + computerGuess)
-            // console.log('Computer: ' + computerGuess);
-
+            // console.log('computer chose ' + computerGuess);
 
             //make sure the user pick the right letters within the options
             // if the userGuess is found in the letters array, then proceed with the game
@@ -76,48 +68,32 @@
                 if (guessLeft !== 0) {
                     //logic for if wind and loss situation
                     if (userGuess === computerGuess) {
-                        //replace 'You tie' with the increment to count how many ties
+                        //win increment
                         wins++;
                         guessLeft--;
-                        // Consider resetting guessLeft count back to original value when a user wins
+                        // reset guessLeft count back to original value when a user wins
                         reset()
-                        // userGuessArray.push(userGuess);
-                        // console.log(win)
                     } else if (userGuess !== computerGuess) {
-                        //replace 'You tie' with the increment to count how many ties
-
                         guessLeft--;
-                        // userGuessArray.push(userGuess);
-                        // console.log(losses)
-                        // Add a condition for when the guessLeft hits 0
-
-
-                        //else if ('guessLeft hits 0 logic')
                     }
 
                 } else {
                     losses++;
                     guessLeft = 3;
                     reset();
-                    // document.getElementById("w").innerHTML = 'Wins &colon; 0';
-                    // document.getElementById("l").innerHTML = 'Lossed &colon; 0'
-                    // document.getElementById("left").innerHTML = 'Guess Left &colon; 3'
-                    // document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ';
-                }
-                //end of logic for win , loss , guessLeft
+                } //end the logic for win , loss , guessLeft
 
-                //updates as win, lose, and guessleft
+                //update win, lose, and guessleft and display on the screen
                 document.getElementById("w").innerHTML = 'Win &colon; ' + wins;
                 document.getElementById("l").innerHTML = 'Loss &colon; ' + losses;
                 document.getElementById("left").innerHTML = 'Guess Left &colon; ' + guessLeft;
                 document.getElementById("result").innerHTML = 'Your Guesses so far &colon; ' +
                     userGuessLetters;
 
-
             } else {
                 // alert('Please choose letter from a to z');
             } // end of else
-        } // end of onkeyup
+        } // end onkeyup
     </script>
 </body>
 
